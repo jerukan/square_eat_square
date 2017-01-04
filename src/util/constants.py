@@ -1,5 +1,7 @@
 class Constants:
 
+#sizes are basically the width/height of the square
+
 #window stuff
     WINDOWHEIGHT = 900
     WINDOWWIDTH = 900
@@ -9,14 +11,17 @@ class Constants:
     WINDOWCENTER = (int(WINDOWWIDTH / 2), int(WINDOWHEIGHT / 2))
 
 #player stuff
-    PLAYERWIDTH = 100
-    PLAYERHEIGHT = 100
+    PLAYERSIZE = 100
 
     PLAYERMOVESPEED = 10
 
     PLAYERINFLATION = 10
 
     PLAYERNAME = 'kappa'
+
+#enemy stuff
+    MAXENEMIES = 3
+    HUNTINGRANGE = 1000
 
 #camera stuff
     CAMERASLACK = 280
@@ -25,7 +30,7 @@ class Constants:
     PLAYERCAMSIZE = 100
 
 #food stuff
-    FOODMAXSIZE = 90
-    FOODMINSIZE = 25
+    FOODMAXSIZE = int(PLAYERSIZE / 3)
+    FOODMINSIZE = int(PLAYERSIZE / 6)
 
     MAXFOODQUANTITY = 20

@@ -11,6 +11,8 @@ class Surface:
 
     foods = []
 
+    enemies = []
+
     DISPLAYSURFACE = pygame.display.set_mode((Constants.WINDOWWIDTH, Constants.WINDOWHEIGHT))
 
     pygame.display.set_caption('SQUARE EAT SQUARE')
@@ -21,12 +23,17 @@ class Surface:
         self.DISPLAYSURFACE.fill(Colors.colorlist['white'])
 
 
+    def scaleassets(self, camera, player):
+        player.scalemodel(camera.scale)
+        for food in self.foods:
+            food.scalemodel(camera.scale)
+        for enemy in self.enemies:
+            enemy.scalemodel(camera.scale)
+
+
     def converttoscreencoords(self, xpos_ypos, cam):
 
         x, y = xpos_ypos
-
-        '''x *= cam.scale
-        y *= cam.scale'''
 
         screenx = x - cam.position[0]
         screeny = y - cam.position[1]
@@ -52,19 +59,6 @@ class Surface:
             screeny = Constants.WINDOWCENTER[1] - screeny
 
         return screenx, screeny
-
-
-    def drawPlayer(self, player, cam):
-
-        playerx, playery = self.converttoscreencoords(player.position, cam)
-
-        player.model.center = (playerx, playery)
-
-        player.scaledmodel.center = player.model.center
-
-        pygame.draw.rect(self.DISPLAYSURFACE, Colors.colorlist['black'], player.scaledmodel)
-
-        self.drawText(Constants.PLAYERNAME, player.scaledmodel.center[0], player.scaledmodel.center[1], int(player.scaledmodel.width / 3))
 
 
     def drawText(self, text, x, y, fontsize):

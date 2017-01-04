@@ -14,9 +14,10 @@ def main():
     cam = Camera()
     surf = Surface()
 
-    surfacehandler = Foodhandler(surf)
+    foodhandler = Foodhandler(surf)
+    enemycontroller = Enemycontroller(surf)
 
-    surfacehandler.createStartingThings(cam, player1)
+    foodhandler.createStartingThings(cam, player1)
 
     while True:
 
@@ -28,12 +29,13 @@ def main():
                 sys.exit()
             player1.getInput(event)
 
-        surfacehandler.runEvents(player1, cam)
+        foodhandler.runEvents(player1, cam)
+        enemycontroller.run(player1, cam)
 
         player1.move()
         cam.shouldMove(player1.position)
 
-        surf.drawPlayer(player1, cam)
+        player1.draw(surf, cam)
 
         pygame.display.update()
         CLOCK.tick(40)

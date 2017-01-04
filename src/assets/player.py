@@ -1,7 +1,7 @@
 import pygame
 
 from copy import deepcopy
-from util import Constants
+from util import Constants, Colors
 from pygame.locals import *
 
 class Player:
@@ -9,56 +9,51 @@ class Player:
 
     position = [0, 0]
 
-    model = pygame.Rect((Constants.WINDOWCENTER[0] - int(Constants.PLAYERWIDTH/2), Constants.WINDOWCENTER[1] - int(Constants.PLAYERHEIGHT/2)), (Constants.PLAYERWIDTH, Constants.PLAYERHEIGHT))
+    model = pygame.Rect((Constants.WINDOWCENTER[0] - int(Constants.PLAYERSIZE/2), Constants.WINDOWCENTER[1] - int(Constants.PLAYERSIZE/2)), (Constants.PLAYERSIZE, Constants.PLAYERSIZE))
 
     scaledmodel = deepcopy(model)
 
-    moveLeft = False
-    moveRight = False
-    moveUp = False
-    moveDown = False
+    speed = [0, 0]
 
     def getInput(self, event):
         if event.type == KEYDOWN:
             if event.key == K_a:
-                self.moveRight = False
-                self.moveLeft = True
+                self.speed[0] = -Constants.PLAYERMOVESPEED
             if event.key == K_d:
-                self.moveRight = True
-                self.moveLeft = False
+                self.speed[0] = Constants.PLAYERMOVESPEED
             if event.key == K_w:
-                self.moveUp = True
-                self.moveDown = False
+                self.speed[1] = Constants.PLAYERMOVESPEED
             if event.key == K_s:
-                self.moveUp = False
-                self.moveDown = True
+                self.speed[1] = -Constants.PLAYERMOVESPEED
+            if event.key == K_f:
+                self.position = [0, 0]
 
         if event.type == KEYUP:
-            if event.key == K_a:
-                self.moveLeft = False
-            if event.key == K_d:
-                self.moveRight = False
-            if event.key == K_w:
-                self.moveUp = False
-            if event.key == K_s:
-                self.moveDown = False
+            if event.key == K_a or event.key == K_d:
+                self.speed[0] = 0
+            if event.key == K_w or event.key == K_s:
+                self.speed[1] = 0
 
 
     def move(self):
-        if self.moveLeft:
-            self.position[0] -= Constants.PLAYERMOVESPEED
-        if self.moveRight:
-            self.position[0] += Constants.PLAYERMOVESPEED
-        if self.moveDown:
-            self.position[1] -= Constants.PLAYERMOVESPEED
-        if self.moveUp:
-            self.position[1] += Constants.PLAYERMOVESPEED
-
-        print('player position: ' + str(self.position))
-        print('player surf position: ' + str(self.scaledmodel.center))
+        self.position[0] += self.speed[0]
+        self.position[1] += self.speed[1]
 
 
-    def scaleplayer(self, value):
+
+    def scalemodel(self, value):
         self.scaledmodel = deepcopy(self.model)
         self.scaledmodel.width *= value
         self.scaledmodel.height *= value
+
+
+    def draw(self, surface, camera):
+
+        playerx, playery = surface.converttoscreencoords(self.position, camera)
+
+        self.model.center = (playerx, playery)
+        self.scaledmodel.center = self.model.center
+
+        pygame.draw.rect(surface.DISPLAYSURFACE, Colors.colorlist['black'], self.scaledmodel)
+
+        surface.drawText(Constants.PLAYERNAME, self.scaledmodel.center[0], self.scaledmodel.center[1], int(self.scaledmodel.width / 3))

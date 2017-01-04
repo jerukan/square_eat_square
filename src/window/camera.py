@@ -42,8 +42,6 @@ class Camera:
             else:
                 self.moving = False
 
-        print('camera position: ' + str(self.position))
-
 
     def extendrange(self, value):
         self.xrange = int(self.xrange * value)
