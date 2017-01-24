@@ -19,7 +19,7 @@ class Enemy:
         self.model = pygame.Rect((surfx, surfy), (self.SIZE, self.SIZE))
         self.scaledmodel = deepcopy(self.model)
 
-        self.MAXSPEED = minenemysize * (0.955 ** (self.SIZE-65))
+        self.MAXSPEED = minenemysize * (0.975 ** (self.SIZE-65))
 
 
     def scalemodel(self, value):

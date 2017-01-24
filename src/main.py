@@ -5,17 +5,40 @@ from assets import *
 from window import *
 from eventhandlers import *
 
+CLOCK = pygame.time.Clock()
 
-def main():
+player1 = Player()
+cam = Camera()
+surf = Surface()
 
-    CLOCK = pygame.time.Clock()
+foodhandler = Foodhandler(surf)
+enemycontroller = Enemycontroller(surf)
 
-    player1 = Player()
-    cam = Camera()
-    surf = Surface()
+def runmenus():
+    previousscreen = surf.mainmenuscreen
+    currentscreen = surf.mainmenuscreen
+    while True:
+        surf.fillSurface()
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == MOUSEBUTTONDOWN:
+                mouseclickposition = pygame.mouse.get_pos()
+            else:
+                mouseclickposition = None
+            mousehoverposition = pygame.mouse.get_pos()
+        currentscreen.displayscreen(surf.DISPLAYSURFACE, mousehoverposition)
+        if mouseclickposition is not None:
+            nextscreen = currentscreen.checkbuttonclicks(mouseclickposition)
 
-    foodhandler = Foodhandler(surf)
-    enemycontroller = Enemycontroller(surf)
+            if nextscreen == "game":
+                rungame()
+
+        pygame.display.update()
+
+
+def rungame():
 
     foodhandler.createStartingThings(cam, player1)
 
@@ -42,4 +65,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    runmenus()

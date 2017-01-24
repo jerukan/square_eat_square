@@ -1,6 +1,7 @@
 import pygame
 
 from util import Colors, Constants
+from window.menuscreens import *
 
 
 class Surface:
@@ -16,6 +17,10 @@ class Surface:
     DISPLAYSURFACE = pygame.display.set_mode((Constants.WINDOWWIDTH, Constants.WINDOWHEIGHT))
 
     pygame.display.set_caption('SQUARE EAT SQUARE')
+
+
+    def __init__(self):
+        self.initScreens()
 
 
     def fillSurface(self):
@@ -69,3 +74,5 @@ class Surface:
         self.DISPLAYSURFACE.blit(textObj, textRect)
 
 
+    def initScreens(self):
+        self.mainmenuscreen = Mainmenuscreen()

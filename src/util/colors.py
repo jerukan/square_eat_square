@@ -3,7 +3,8 @@ class Colors:
     colorlist = {
         'black': (0, 0, 0),
         'white': (255, 255, 255),
-        'red': (255, 0, 0)
+        'red': (255, 0, 0),
+        'transparentgreen': (0, 255, 0, 128)
     }
 
     foodcolorlist = {
