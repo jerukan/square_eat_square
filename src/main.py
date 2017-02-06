@@ -14,7 +14,7 @@ surf = Surface()
 foodhandler = Foodhandler(surf)
 enemycontroller = Enemycontroller(surf)
 
-def runmenus():
+def runmenu():
     previousscreen = surf.mainmenuscreen
     currentscreen = surf.mainmenuscreen
     while True:
@@ -34,6 +34,11 @@ def runmenus():
 
             if nextscreen == "game":
                 rungame()
+            elif nextscreen == "help":
+                previousscreen = currentscreen
+                currentscreen = surf.helpscreen
+            elif nextscreen == "back":
+                currentscreen = previousscreen
 
         pygame.display.update()
 
@@ -65,4 +70,4 @@ def rungame():
 
 
 if __name__ == "__main__":
-    runmenus()
+    runmenu()

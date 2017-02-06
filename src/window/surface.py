@@ -76,3 +76,4 @@ class Surface:
 
     def initScreens(self):
         self.mainmenuscreen = Mainmenuscreen()
+        self.helpscreen = Helpscreen()

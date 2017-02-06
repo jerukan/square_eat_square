@@ -10,8 +10,8 @@ class Screen:
             self.buttonlist.append(button)
 
 
-    def drawText(self, text, x, y, surface):
-        font = pygame.font.SysFont(None, 36)
+    def drawText(self, text, x, y, surface, fontsize):
+        font = pygame.font.SysFont(None, fontsize)
         textObj = font.render(text, True, Colors.colorlist['black'])
         textRect = textObj.get_rect()
         textRect.center = (x, y)
