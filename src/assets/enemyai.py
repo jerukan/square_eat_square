@@ -20,6 +20,8 @@ class Enemy:
         self.scaledmodel = deepcopy(self.model)
 
         self.MAXSPEED = minenemysize * (0.975 ** (self.SIZE-65))
+        if self.MAXSPEED < 3:
+            self.MAXSPEED = 3
 
 
     def scalemodel(self, value):

@@ -1,4 +1,4 @@
-import pygame, random, sys
+import pygame, random
 
 from assets.enemyai import Enemy
 from util import Colors, Constants
@@ -14,9 +14,11 @@ class Enemycontroller:
         self.removeenemies(cam)
         self.generateenemy(player, cam)
         self.moveenemies(player)
-        self.checkcollisions(player, cam)
+        gamestate = self.checkcollisions(player, cam)
         self.updateenemyposition(cam)
         self.drawenemies()
+        if gamestate == "gameover":
+            return "gameover"
 
 
     def collidewithotherthings(self, rect):
@@ -40,8 +42,8 @@ class Enemycontroller:
                     player.model = player.model.inflate(Constants.PLAYERINFLATION, Constants.PLAYERINFLATION)
                     camera.extendrange(1.01)
                     self.surface.scaleassets(camera, player)
-                '''else:
-                    sys.exit()'''
+                else:
+                    return "gameover"
 
             else:
                 enemyit = iter(self.surface.enemies)

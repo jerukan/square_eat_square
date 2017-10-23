@@ -23,6 +23,11 @@ class Surface:
         self.initScreens()
 
 
+    def resetScreen(self):
+        self.foods = []
+        self.enemies = []
+
+
     def fillSurface(self):
 
         self.DISPLAYSURFACE.fill(Colors.colorlist['white'])
@@ -77,3 +82,4 @@ class Surface:
     def initScreens(self):
         self.mainmenuscreen = Mainmenuscreen()
         self.helpscreen = Helpscreen()
+        self.gameoverscreen = Gameoverscreen()

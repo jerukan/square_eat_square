@@ -4,14 +4,15 @@ from util import Functions, Constants
 
 class Camera:
 
-    position = [0, 0]
+    def initCamera(self):
+        self.position = [0, 0]
 
-    xrange = Constants.WINDOWWIDTH
-    yrange = Constants.WINDOWHEIGHT
+        self.xrange = Constants.WINDOWWIDTH
+        self.yrange = Constants.WINDOWHEIGHT
 
-    scale = 1
+        self.scale = 1
 
-    moving = False
+        self.moving = False
 
 
     def move(self, xgoal, ygoal):

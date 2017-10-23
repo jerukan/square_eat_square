@@ -35,6 +35,11 @@ class Player:
                 self.speed[1] = 0
 
 
+    def resetPlayer(self):
+        self.scaledmodel = deepcopy(self.model)
+        self.position = [0,0]
+
+
     def move(self):
         self.position[0] += self.speed[0]
         self.position[1] += self.speed[1]
